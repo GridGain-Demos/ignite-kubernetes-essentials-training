@@ -18,7 +18,7 @@ spec:
         app: ignite
     spec:
       serviceAccountName: ignite
-      terminationGracePeriodSeconds: 60000
+      # terminationGracePeriodSeconds: 60000 (use in production for graceful restarts and shutdowns)
       containers:
         # Custom pod name.
         - name: ignite-node
@@ -29,7 +29,8 @@ spec:
             - name: CONFIG_URI
               value: file:///ignite/config/ignite-node-cfg.xml
             - name: JVM_OPTS
-              value: "-DIGNITE_WAL_MMAP=false -DIGNITE_WAIT_FOR_BACKUPS_ON_SHUTDOWN=true"
+              value: "-DIGNITE_WAL_MMAP=false"
+              # consider this property for production -DIGNITE_WAIT_FOR_BACKUPS_ON_SHUTDOWN=true
           ports:
             # Ports you might need to open.
             - containerPort: 47100 # communication SPI port

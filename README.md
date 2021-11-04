@@ -146,10 +146,29 @@ Go to the `Snapshots` screen of Control Center and create a sample snapshot of y
 
 ## Connect With External Applications
 
+In this section, you're connecting to the K8 Ignite cluster with external APIs and applications (those that are not deployed
+in the same K8 environment).
 
-## Resources Removal
+### Query Data With Ignite REST API
 
-`kubectl delete sts ignite-cluster -n ignite-namespace`
+1. Open up your preferred browser and check the cluster state via the Ignite REST API:
+    ```bash
+    http://localhost:8080/ignite?cmd=state
+    ```
+   Note, the `localhost` is the `external-IP` of the Ignite Kubernetes Service.
 
-Terminate stuck pod:
+2. Select the count of Cities:
+    ```bash
+    http://localhost:8080/ignite?cmd=qryfldexe&pageSize=10&cacheName=City&qry=SELECT%20count(*)%20From%20City
+    ```  
+3. Run the `SampleJavaApp` located in this project.   
+
+## Clear Project Resources
+
+Use the command below to clean/remove all the resources associated with this demo project:
+    ```bash
+    kubectl delete namespace ignite-namespace
+    ```  
+
+Note, use this command if the termination of an Ignite pod is stuck:
 `kubectl delete pod ignite-cluster-1 --grace-period=0 --force -n ignite-namespace`
