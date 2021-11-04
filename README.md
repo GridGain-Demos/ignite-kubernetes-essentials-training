@@ -172,10 +172,18 @@ in the same K8 environment).
 
 ## Clear Project Resources
 
-Use the command below to clean/remove all the resources associated with this demo project:
+1. Remove all the resources associated with this project:
     ```bash
     kubectl delete namespace ignite-namespace
     ```  
+2. Remove the ClusterRole:
+    ```bash
+    kubectl delete clusterrole ignite -n ignite-namespace
+    ```
+3. Remove the ClusterRole binding:
+    ```bash
+    kubectl delete clusterrolebinding ignite -n ignite-namespace
+    ```
 
 Note, use this command if the termination of an Ignite pod is stuck:
 `kubectl delete pod ignite-cluster-1 --grace-period=0 --force -n ignite-namespace`
