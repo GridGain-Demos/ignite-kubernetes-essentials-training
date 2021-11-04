@@ -2,10 +2,20 @@
 Project for the Apache Ignite and Kubernetes Training Course
 
 
-## Pre-requisite
+## Setting Up Environment
 
-1. Install Docker Desktop
+1. Install Docker Desktop and `kubectl` tool.
 2. Enable Kubernetes through Docker Desktop's settings: https://docs.docker.com/desktop/kubernetes/
+3. Java Developer Kit, version 8 or later
+4. Apache Maven 3.0 or later
+5. Your favorite IDE, such as IntelliJ IDEA, or Eclipse, or a simple text editor.
+
+## Clone The Project
+
+1. Clone this project or download it as an archive:
+    ```bash
+    git clone https://github.com/GridGain-Demos/ignite-kubernetes-essentials-training.git 
+    ```
 
 ## Set Up Kubernetes for Ignite
 
@@ -59,9 +69,6 @@ Next, create a Cluster Role and Service Accounts:
     ```
 5. Attach your cluster to GridGain Control Center by going to `portal.gridgain.com` and providing the
 cluster's token ID from the logs.
-
-TODO, if you weren't able to attache the cluster to CC within the 5 minutes window:
-https://ignite.apache.org/docs/latest/installation/kubernetes/amazon-eks-deployment#activating-the-cluster
 
 ## Scale Out the Ignite Cluster
 
