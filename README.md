@@ -1,11 +1,18 @@
-# ignite-kubernetes-essentials-training
-Project for the Apache Ignite and Kubernetes Training Course
+# Project Template for the Apache Ignite and Kubernetes Training Course
+
+This project is used for hands-on exercises of the 
+[Apache Ignite and Kubernetes: Deployment and Orchestration Strategies](https://www.gridgain.com/products/services/training/apache-ignite-and-kubernetes-deployment-and-orchestration-strategies)
+training course. That's a free two-hour training session for developers, architects, and DevOps engineers who need to 
+deploy and orchestrate Apache Ignite in a Kubernetes environment.
+
+Check the [schedule](https://www.gridgain.com/services/training) a join one of our upcoming sessions. 
+All the courses are delivered by seasoned Ignite community members.
 
 
 ## Setting Up Environment
 
 1. Install Docker Desktop and `kubectl` tool.
-2. Enable Kubernetes through Docker Desktop's settings: https://docs.docker.com/desktop/kubernetes/
+2. Enable Kubernetes in [Docker Desktop's settings](https://docs.docker.com/desktop/kubernetes/)
 3. Java Developer Kit, version 8 or later
 4. Apache Maven 3.0 or later
 5. Your favorite IDE, such as IntelliJ IDEA, or Eclipse, or a simple text editor.
