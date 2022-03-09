@@ -1,11 +1,11 @@
 # Project Template for the Apache Ignite and Kubernetes Training Course
 
-This project is used for hands-on exercises of the 
+This project is used for hands-on exercises of the
 [Apache Ignite and Kubernetes: Deployment and Orchestration Strategies](https://www.gridgain.com/products/services/training/apache-ignite-and-kubernetes-deployment-and-orchestration-strategies)
-training course. That's a free two-hour training session for developers, architects, and DevOps engineers who need to 
+training course. That's a free two-hour training session for developers, architects, and DevOps engineers who need to
 deploy and orchestrate Apache Ignite in a Kubernetes environment.
 
-Check the [schedule](https://www.gridgain.com/services/training) a join one of our upcoming sessions. 
+Check the [schedule](https://www.gridgain.com/services/training) a join one of our upcoming sessions.
 All the courses are delivered by seasoned Ignite community members.
 
 
@@ -21,7 +21,7 @@ All the courses are delivered by seasoned Ignite community members.
 
 1. Clone this project or download it as an archive:
     ```bash
-    git clone https://github.com/GridGain-Demos/ignite-kubernetes-essentials-training.git 
+    git clone https://github.com/GridGain-Demos/ignite-kubernetes-essentials-training.git
     ```
 
 ## Set Up Kubernetes for Ignite
@@ -29,63 +29,34 @@ All the courses are delivered by seasoned Ignite community members.
 Start the Ignite Kubernetes Service that is used inter-node communication needs:
 1. Navigate to the project's config folder:
     ```bash
-    cd {project_root}/ignite-kubernetes-essentials-training/config 
+    cd {project_root}/ignite-kubernetes-essentials-training/config
     ```
 
 2. Create a namespace for the training course:
      ```bash
-     kubectl create namespace ignite-namespace 
+     kubectl create namespace ignite-namespace
      ```
 
 3. Start the Ignite Kubernetes service
     ```bash
-    kubectl create -f ignite-service.yaml 
+    kubectl create -f ignite-service.yaml
     ```
 4. Confirm the service is running:
     ```bash
-    kubectl get services -n ignite-namespace 
+    kubectl get services -n ignite-namespace
     ```
 
 Next, create a Cluster Role and Service Accounts:
 1. Create a service account:
     ```bash
-    kubectl create sa ignite -n ignite-namespace 
+    kubectl create sa ignite -n ignite-namespace
     ```
 2. Create a Cluster Role:
     ```bash
-    kubectl create -f cluster-role.yaml 
+    kubectl create -f cluster-role.yaml
     ```
-   
+
 ## Start Ignite Cluster
-
-1. Create a ConfigMap:
-    ```bash
-    kubectl create configmap ignite-cfg-memory-only -n ignite-namespace --from-file=memory-only/ignite-node-cfg.xml 
-    ```
-2. Start the cluster:
-    ```bash
-    kubectl create -f memory-only/ignite-cluster.yaml
-    ```
-3. Confirm the Ignite pods are running:
-    ```bash
-    kubectl get pods -n ignite-namespace
-    ```
-4. Double check with Ignite logs that a 2-node cluster was created:
-    ```bash
-    kubectl logs ignite-cluster-0 -n ignite-namespace
-    ```
-5. Attach your cluster to GridGain Control Center by going to `portal.gridgain.com` and providing the
-cluster's token ID from the logs.
-
-## Scale Out the Ignite Cluster
-
-1. Scale the cluster by adding the 3rd node:
-    ```bash
-    kubectl scale sts ignite-cluster --replicas=3 -n ignite-namespace
-    ```
-2. Check with the Control Center Dashboard that you have the 3-node cluster.
-
-## Start the Cluster With Native Persistence
 
 1. Stop the memory-only cluster:
     ```bash
@@ -93,7 +64,7 @@ cluster's token ID from the logs.
     ```
 2. Create a ConfigMap with persistent configuration:
     ```bash
-    kubectl create configmap ignite-cfg-persistent -n ignite-namespace --from-file=persistent/ignite-node-cfg.xml 
+    kubectl create configmap ignite-cfg-persistent -n ignite-namespace --from-file=persistent/ignite-node-cfg.xml
     ```
 3. Start the cluster:
     ```bash
@@ -111,20 +82,6 @@ cluster's token ID from the logs.
 cluster's token ID from the logs.   
 
 7. Active the persistent cluster with Control Center `https://portal.gridgain.com/clusters/list`
-
-## Create Dashboard for Storage Metrics Monitoring
-
-1. Go to the Dashboard screen of Control Center
-
-2. Create a new Dashboard named `Storage Metrics`
-
-3. Add the following widgets to the Dashboard:
-    * Off-heap memory: `Metrics(table)`->`PhysicalMemorySize` (for the `default` region)
-    * Storage size: `Metrics(table)`->`StorageSize` (for the `datastorage`)
-    * WAL size: `Metrics(table)`->`WALTotalSize`
-    * Checkpointing duraion: `Metrics(chart)`->`LastCheckpointDuration`
-    * Other metrics: https://www.gridgain.com/docs/tutorials/management-monitoring/ignite-storage-monitoring
-    
 
 ## Load Sample Database
 
@@ -154,9 +111,18 @@ cluster's token ID from the logs.
     ```
 7. Refresh the `Storage Metrics` dashboard on the Control Center side to confirm that the data was loaded.
 
-## Create Cluster Snapshot
+# Create Dashboard for Storage Metrics Monitoring
 
-Go to the `Snapshots` screen of Control Center and create a sample snapshot of your Kubernetes cluster.
+1. Go to the Dashboard screen of Control Center
+
+2. Create a new Dashboard named `Storage Metrics`
+
+3. Add the following widgets to the Dashboard:
+    * Off-heap memory: `Metrics(table)`->`PhysicalMemorySize` (for the `default` region)
+    * Storage size: `Metrics(table)`->`StorageSize` (for the `datastorage`)
+    * WAL size: `Metrics(table)`->`WALTotalSize`
+    * Checkpointing duraion: `Metrics(chart)`->`LastCheckpointDuration`
+    * Other metrics: https://www.gridgain.com/docs/tutorials/management-monitoring/ignite-storage-monitoring
 
 ## Connect With External Applications
 
@@ -176,6 +142,31 @@ in the same K8 environment).
     http://localhost:8080/ignite?cmd=qryfldexe&pageSize=10&cacheName=City&qry=SELECT%20count(*)%20From%20City
     ```  
 3. Run the `SampleJavaApp` located in this project.   
+
+## Run Java Thin Client
+
+1. Open the Java project in your IDE
+
+2. Execute the thin client class
+  ```
+  com.gridgain.example.SampleThinClient
+  ```
+
+## Deploy Thick Client in kubernetes
+
+1. Build the project
+  ```bash
+  mvn clean package
+  ```
+
+2. Create the Docker image
+  ```bash
+  docker build -t ignite-thick-client .
+  ```
+3. Create the thick client pods
+  ```bash
+   kubectl apply -f config/thick-client.yaml
+   ```
 
 ## Clear Project Resources
 

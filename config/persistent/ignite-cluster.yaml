@@ -22,7 +22,7 @@ spec:
       containers:
         # Custom pod name.
         - name: ignite-node
-          image: gridgain/ultimate:8.8.10
+          image: gridgain/community:8.8.16
           env:
             - name: OPTION_LIBS
               value: ignite-kubernetes,ignite-rest-http,control-center-agent
@@ -49,8 +49,6 @@ spec:
               name: wal-vol
             - mountPath: /ignite/walarchive
               name: walarchive-vol
-            - mountPath: /ignite/snapshots
-              name: snapshots-vol
       volumes:
         - name: config-vol
           configMap:
@@ -88,15 +86,6 @@ spec:
       spec:
         accessModes: [ "ReadWriteOnce" ]
         #storageClassName: "ignite-walarchive-storage-class"
-        resources:
-          requests:
-            storage: "1Gi"
-
-    - metadata:
-        name: snapshots-vol
-      spec:
-        accessModes: [ "ReadWriteOnce" ]
-        #storageClassName: "ignite-snapshots-storage-class"
         resources:
           requests:
             storage: "1Gi"
