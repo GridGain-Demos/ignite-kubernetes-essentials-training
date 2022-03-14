@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  # The name must be equal to KubernetesConnectionConfiguration.serviceName
+  name: ignite-client-service
+  # The name must be equal to KubernetesConnectionConfiguration.namespace
+  namespace: ignite-namespace
+  labels:
+    app: ignite-thick-client
+spec:
+  type: LoadBalancer
+  ports:
+    - name: rest
+      port: 8088
+      targetPort: 8088
+  # The pod-to-service routing is required for apps that are not deployed in K8
+  sessionAffinity: ClientIP
+  selector:
+    # Must be equal to the label set for pods.
+    app: ignite-thick-client
+status:
+  loadBalancer: {}

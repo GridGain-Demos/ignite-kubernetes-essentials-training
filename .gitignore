@@ -3,3 +3,5 @@
 .project
 .settings/**
 .settings
+/.classpath
+/k8dashboard.tgz

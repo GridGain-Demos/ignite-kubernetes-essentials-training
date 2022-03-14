@@ -58,30 +58,26 @@ Next, create a Cluster Role and Service Accounts:
 
 ## Start Ignite Cluster
 
-1. Stop the memory-only cluster:
-    ```bash
-    kubectl delete sts ignite-cluster -n ignite-namespace
-    ```
-2. Create a ConfigMap with persistent configuration:
+1. Create a ConfigMap with persistent configuration:
     ```bash
     kubectl create configmap ignite-cfg-persistent -n ignite-namespace --from-file=persistent/ignite-node-cfg.xml
     ```
-3. Start the cluster:
+2. Start the cluster:
     ```bash
     kubectl create -f persistent/ignite-cluster.yaml
     ```   
-4. Confirm the Ignite pods are running:
+3. Confirm the Ignite pods are running:
     ```bash
     kubectl get pods -n ignite-namespace
     ```
-5. Double check with Ignite logs that a 2-node cluster was created:
+4. Double check with Ignite logs that a 2-node cluster was created:
     ```bash
     kubectl logs ignite-cluster-0 -n ignite-namespace
     ```
-6. Attach your cluster to GridGain Control Center by going to `https://portal.gridgain.com/` and providing the
+5. Attach your cluster to GridGain Control Center by going to `https://portal.gridgain.com/` and providing the
 cluster's token ID from the logs.   
 
-7. Active the persistent cluster with Control Center `https://portal.gridgain.com/clusters/list`
+6. Active the persistent cluster with Control Center `https://portal.gridgain.com/clusters/list`
 
 ## Load Sample Database
 

@@ -29,6 +29,10 @@
         <!-- Set to true to enable distributed class loading for examples, default is false. -->
         <property name="peerClassLoadingEnabled" value="true"/>
 
+        <property name="tracingSpi">
+                <bean class="org.apache.ignite.spi.tracing.opencensus.OpenCensusTracingSpi" />
+        </property>
+
         <property name="workDirectory" value="/ignite/work"/>
 
         <!-- Memory configuration. -->

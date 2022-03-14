@@ -28,13 +28,8 @@
     <bean class="org.apache.ignite.configuration.IgniteConfiguration">
         <!-- Set to true to enable distributed class loading for examples, default is false. -->
         <property name="peerClassLoadingEnabled" value="true"/>
-
-        <property name="tracingSpi">
-                <bean class="org.apache.ignite.spi.tracing.opencensus.OpenCensusTracingSpi" />
-        </property>
-
-        <property name="workDirectory" value="/ignite/work"/>
-
+		<property name="deploymentMode" value="CONTINUOUS" />
+		
         <!-- Memory configuration. -->
         <property name="dataStorageConfiguration">
             <bean class="org.apache.ignite.configuration.DataStorageConfiguration">
@@ -51,20 +46,20 @@
         </property>
 
         <!-- Configuring the IP finder for nodes auto-discovery. -->
-        <property name="discoverySpi">
-            <bean class="org.apache.ignite.spi.discovery.tcp.TcpDiscoverySpi">
-                <property name="ipFinder">
-                    <bean
-                        class="org.apache.ignite.spi.discovery.tcp.ipfinder.kubernetes.TcpDiscoveryKubernetesIpFinder">
-                        <constructor-arg>
-                            <bean class="org.apache.ignite.kubernetes.configuration.KubernetesConnectionConfiguration">
-                                <property name="namespace" value="ignite-namespace"/>
-                                <property name="serviceName" value="ignite-service"/>
-                            </bean>
-                        </constructor-arg>
-                    </bean>
-                </property>
-            </bean>
-        </property>
+		<property name="discoverySpi">
+			<bean
+				class="org.apache.ignite.spi.discovery.tcp.TcpDiscoverySpi">
+				<property name="ipFinder">
+					<bean
+						class="org.apache.ignite.spi.discovery.tcp.ipfinder.vm.TcpDiscoveryVmIpFinder">
+						<property name="addresses">
+							<list>
+								<value>127.0.0.1:47500..47510</value>
+							</list>
+						</property>
+					</bean>
+				</property>
+			</bean>
+		</property>
     </bean>
 </beans>
