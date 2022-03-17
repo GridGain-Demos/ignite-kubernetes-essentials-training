@@ -168,7 +168,13 @@ in the same K8 environment).
   ```bash
   docker build -t ignite-thick-client .
   ```
-3. Create the thick client pods
+
+3. Create the client Kubernetes Service
+   ```bash
+   kubectl apply -f ignite-client-service.yaml
+   ```
+   
+4. Create the thick client pods
   ```bash
    kubectl apply -f config/thick-client.yaml
    ```
