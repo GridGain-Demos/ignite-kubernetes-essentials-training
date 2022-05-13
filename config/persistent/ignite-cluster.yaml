@@ -22,7 +22,7 @@ spec:
       containers:
         # Custom pod name.
         - name: ignite-node
-          image: gridgain/community:8.8.16
+          image: gridgain/ultimate:8.8.18
           env:
             - name: OPTION_LIBS
               value: ignite-kubernetes,ignite-rest-http,control-center-agent

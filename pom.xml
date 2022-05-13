@@ -14,7 +14,7 @@
 	</repositories>
 
 	<properties>
-		<gridgain.version>8.8.16</gridgain.version>
+		<gridgain.version>8.8.18</gridgain.version>
 		<jetty.version>9.4.45.v20220203</jetty.version>
 		<maven.compiler.source>8</maven.compiler.source>
 		<maven.compiler.target>11</maven.compiler.target>
@@ -24,6 +24,16 @@
 		<dependency>
 			<groupId>org.gridgain</groupId>
 			<artifactId>ignite-core</artifactId>
+			<version>${gridgain.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.gridgain</groupId>
+			<artifactId>gridgain-core</artifactId>
+			<version>${gridgain.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.gridgain</groupId>
+			<artifactId>gridgain-ultimate</artifactId>
 			<version>${gridgain.version}</version>
 		</dependency>
 		<dependency>
@@ -96,6 +106,16 @@
 									<mainClass>com.gridgain.example.rest.WebServer</mainClass>
 								</transformer>
 							</transformers>
+							<filters>
+								<filter>
+									<artifact>*:*</artifact>
+									<excludes>
+										<exclude>META-INF/*.SF</exclude>
+										<exclude>META-INF/*.DSA</exclude>
+										<exclude>META-INF/*.RSA</exclude>
+									</excludes>
+								</filter>
+							</filters>
 						</configuration>
 					</execution>
 				</executions>

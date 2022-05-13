@@ -171,9 +171,9 @@ in the same K8 environment).
 
 3. Create the client Kubernetes Service
    ```bash
-   kubectl apply -f ignite-client-service.yaml
+   kubectl apply -f config/ignite-client-service.yaml
    ```
-   
+
 4. Create the thick client pods
   ```bash
    kubectl apply -f config/thick-client.yaml
