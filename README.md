@@ -41,10 +41,15 @@ All the courses are delivered by seasoned Ignite community members.
    ```bash
    kubectl -n kubernetes-dashboard get secret $(kubectl -n kubernetes-dashboard get sa/admin-user -o jsonpath="{.secrets[0].name}") -o go-template="{{.data.token | base64decode}}"
    ```
-5. Open Dashboard in browser
+5. Run the proxy
+   ```bash
+   kubectl proxy
+   ```
+
+6. Open Dashboard in browser
    <http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#/login>
 
-6. Paste the token you created in 4.
+7. Paste the token you created in 4.
 
 ## Set Up Kubernetes for Ignite
 
