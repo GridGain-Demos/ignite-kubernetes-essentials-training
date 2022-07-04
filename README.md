@@ -13,7 +13,7 @@ All the courses are delivered by seasoned Ignite community members.
 
 1. Install Docker Desktop and `kubectl` tool.
 2. Enable Kubernetes in [Docker Desktop's settings](https://docs.docker.com/desktop/kubernetes/)
-3. Java Developer Kit, version 8 or later
+3. Java Developer Kit, version 11 or later
 4. Apache Maven 3.0 or later
 5. Your favorite IDE, such as IntelliJ IDEA, or Eclipse, or a simple text editor.
 
@@ -38,18 +38,20 @@ All the courses are delivered by seasoned Ignite community members.
    kubectl apply -f cluster-role-binding.yaml
    ```
 4. Create token
+ ```bash
+  kubectl -n kubernetes-dashboard create token admin-user
+  ```
+5. Get the token
    ```bash
    kubectl -n kubernetes-dashboard get secret $(kubectl -n kubernetes-dashboard get sa/admin-user -o jsonpath="{.secrets[0].name}") -o go-template="{{.data.token | base64decode}}"
    ```
-5. Run the proxy
+6. Run the proxy
    ```bash
    kubectl proxy
    ```
-
-6. Open Dashboard in browser
+7. Open Dashboard in browser
    <http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#/login>
-
-7. Paste the token you created in 4.
+8. Paste the token you got in 5.
 
 ## Set Up Kubernetes for Ignite
 
@@ -151,8 +153,6 @@ in the same K8 environment).
     ```bash
     http://localhost:8080/ignite?cmd=qryfldexe&pageSize=10&cacheName=City&qry=SELECT%20count(*)%20From%20City
     ```  
-3. Run the `SampleJavaApp` located in this project.   
-
 ## Run Java Thin Client
 
 1. Open the Java project in your IDE
