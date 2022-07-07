@@ -183,6 +183,10 @@ in the same K8 environment).
   ```bash
    kubectl apply -f config/thick-client.yaml
    ```
+5. Open up your preferred browser and check the REST API:
+    ```bash
+    http://localhost:8088/cities
+    ```
 
 ## Clear Project Resources
 
