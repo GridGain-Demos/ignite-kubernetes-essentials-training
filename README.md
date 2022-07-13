@@ -45,6 +45,7 @@ All the courses are delivered by seasoned Ignite community members.
    ```bash
    kubectl -n kubernetes-dashboard get secret $(kubectl -n kubernetes-dashboard get sa/admin-user -o jsonpath="{.secrets[0].name}") -o go-template="{{.data.token | base64decode}}"
    ```
+   This step may not work on Windows workstation and can be skipped.
 6. Run the proxy
    ```bash
    kubectl proxy
@@ -153,6 +154,8 @@ in the same K8 environment).
     ```bash
     http://localhost:8080/ignite?cmd=qryfldexe&pageSize=10&cacheName=City&qry=SELECT%20count(*)%20From%20City
     ```  
+    Note, on Windows workstation due to Hyper-V or WSL above port 8080 may be blocked. A workaround is to install k8slens and it will create a port forwarding to 8080 via a local_port on localhost. Then invoke the Ignite REST API as http://localhost:<local_port>/ignite?cmd=......
+    
 ## Run Java Thin Client
 
 1. Open the Java project in your IDE
@@ -161,6 +164,7 @@ in the same K8 environment).
   ```
   com.gridgain.example.SampleThinClient
   ```
+Note, the thin client tries to connect to your Ignite cluster on 10800 port. On Windows workstation that port is not automatically selected and so in k8slens create a port forwarding to 10800 by setting local_port to 10800 on localhost.
 
 ## Deploy Thick Client in kubernetes
 
@@ -187,7 +191,8 @@ in the same K8 environment).
     ```bash
     http://localhost:8088/cities
     ```
-
+ Note, as was the case in REST API, on Windows workstation due to Hyper-V or WSL above port 8088 may be blocked. Use k8slens to create a port forwarding to 8080 via a local_port on localhost. Then invoke the Ignite REST API as http://localhost:<local_port>/cities
+ 
 ## Clear Project Resources
 
 1. Remove all the resources associated with this project:
