@@ -191,7 +191,7 @@ Note, the thin client tries to connect to your Ignite cluster on 10800 port. On 
     ```bash
     http://localhost:8088/cities
     ```
- Note, as was the case in REST API, on Windows workstation due to Hyper-V or WSL above port 8088 may be blocked. Use k8slens to create a port forwarding to 8080 via a local_port on localhost. Then invoke the Ignite REST API as http://localhost:<local_port>/cities
+ Note, as was the case in Ignite REST API above, on Windows workstation due to Hyper-V or WSL above port 8088 may be blocked. Use k8slens to create a port forwarding to 8080 via a local_port on localhost. Then invoke the Ignite REST API as http://localhost:<local_port>/cities
  
 ## Clear Project Resources
 
