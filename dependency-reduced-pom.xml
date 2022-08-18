@@ -55,7 +55,7 @@
     </repository>
   </repositories>
   <properties>
-    <gridgain.version>8.8.18</gridgain.version>
+    <gridgain.version>8.8.20</gridgain.version>
     <maven.compiler.target>11</maven.compiler.target>
     <maven.compiler.source>8</maven.compiler.source>
     <jetty.version>9.4.45.v20220203</jetty.version>
