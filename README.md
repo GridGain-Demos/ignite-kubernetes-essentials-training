@@ -154,36 +154,34 @@ in the same K8 environment).
     
 ## Run Java Thin Client
 
-1. Open the Java project in your IDE
-
-2. Execute the thin client class
-  ```
-  com.gridgain.example.SampleThinClient
-  ```
-Note, the thin client tries to connect to your Ignite cluster on 10800 port. On Windows workstation that port is not automatically selected and so in k8slens create a port forwarding to 10800 by setting local_port to 10800 on localhost.
-
-## Deploy Thick Client in kubernetes
-
 1. Build the project
   ```bash
   mvn clean package
   ```
 
-2. Create the Docker image
+2. Execute the thin client class
+  ```
+  java -cp target/ignite-kubernetes-essentials-training-1.0-SNAPSHOT.jar com.gridgain.example.SampleThinClient
+  ```
+Note, the thin client tries to connect to your Ignite cluster on 10800 port. On Windows workstation that port is not automatically selected and so in k8slens create a port forwarding to 10800 by setting local_port to 10800 on localhost.
+
+## Deploy Thick Client in kubernetes
+
+1. Create the Docker image
   ```bash
   docker build -t ignite-thick-client .
   ```
 
-3. Create the client Kubernetes Service
+2. Create the client Kubernetes Service
    ```bash
    kubectl apply -f config/ignite-client-service.yaml
    ```
 
-4. Create the thick client pods
+3. Create the thick client pods
   ```bash
    kubectl apply -f config/thick-client.yaml
    ```
-5. Open up your preferred browser and check the REST API:
+4. Open up your preferred browser and check the REST API:
     ```bash
     http://localhost:8088/cities
     ```
