@@ -16,10 +16,10 @@
   ```bash
   kubectl -n kubernetes-dashboard create token admin-user
   ```
-5. Get the token
-  ```bash
-  kubectl -n kubernetes-dashboard get secret $(kubectl -n kubernetes-dashboard get sa/admin-user -o jsonpath="{.secrets[0].name}") -o go-template="{{.data.token | base64decode}}"
-  ```
+5. Run the proxy
+   ```bash
+   kubectl proxy
+   ```
 6. Open Dashboard in browser
   <http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#/login>
 
