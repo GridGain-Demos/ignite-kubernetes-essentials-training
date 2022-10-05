@@ -27,11 +27,11 @@ All the courses are delivered by seasoned Ignite community members.
 
 1. Apply the Dashboard configuration
    ```bash
+   cd {project_root}/ignite-kubernetes-essentials-training/k8dashboard
    kubectl apply -f k8ui.yaml
    ```
 2. Create the Service Account
    ```bash
-   cd {project_root}/ignite-kubernetes-essentials-training/k8dashboard
    kubectl apply -f service-account.yaml
    ```
 3. Apply the Cluster Role Binding
