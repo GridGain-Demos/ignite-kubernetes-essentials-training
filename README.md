@@ -40,9 +40,7 @@ All the courses are delivered by seasoned Ignite community members.
 4. Create token
  ```bash
   kubectl -n kubernetes-dashboard create token admin-user
-  ```
-   This step may not work on Windows workstation and can be skipped.
-   
+  ```   
 5. Run the proxy
    ```bash
    kubectl proxy
