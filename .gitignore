@@ -4,5 +4,7 @@
 .project
 .settings/**
 .settings
+.factorypath
 /.classpath
 /k8dashboard.tgz
+**/Icon*

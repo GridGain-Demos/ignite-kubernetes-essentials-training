@@ -1,4 +1,4 @@
-# Project Template for the Apache Ignite and Kubernetes Training Course
+# Apache Ignite and Kubernetes Training Course
 
 This project is used for hands-on exercises of the
 [Apache Ignite and Kubernetes: Deployment and Orchestration Strategies](https://www.gridgain.com/products/services/training/apache-ignite-and-kubernetes-deployment-and-orchestration-strategies)
@@ -11,7 +11,9 @@ All the courses are delivered by seasoned Ignite community members.
 
 ## Setting Up Environment
 
-1. Install Docker Desktop and `kubectl` tool. We tested with server version 1.24.2 and kubectl version 1.24.3
+This project uses GridGain Community Edition version 8.8.27
+
+1. Install Docker Desktop and `kubectl` tool. We tested with version 4.18.0.
 2. Enable Kubernetes in [Docker Desktop's settings](https://docs.docker.com/desktop/kubernetes/)
 3. Java Developer Kit, version 11 or later
 4. Apache Maven 3.0 or later
@@ -23,32 +25,40 @@ All the courses are delivered by seasoned Ignite community members.
     ```bash
     git clone https://github.com/GridGain-Demos/ignite-kubernetes-essentials-training.git
     ```
+
 ## Setup Kubernetes Dashboard
 
-1. Apply the Dashboard configuration
+1. Change into dashboard directory
    ```bash
    cd {project_root}/ignite-kubernetes-essentials-training/k8dashboard
+   ```
+1. Apply the Metrics Server configuration
+   ```bash
+   kubectl apply -f metrics-server.yaml
+   ```
+1. Apply the Dashboard configuration
+   ```bash
    kubectl apply -f k8ui.yaml
    ```
-2. Create the Service Account
+1. Create the Service Account
    ```bash
    kubectl apply -f service-account.yaml
    ```
-3. Apply the Cluster Role Binding
+1. Apply the Cluster Role Binding
    ```bash
    kubectl apply -f cluster-role-binding.yaml
    ```
-4. Create token
+1. Create token
  ```bash
   kubectl -n kubernetes-dashboard create token admin-user
   ```   
-5. Run the proxy
+1. Run the proxy
    ```bash
    kubectl proxy
    ```
-6. Open Dashboard in browser
+1. Open Dashboard in browser
    <http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#/login>
-7. Paste the token you got in 4.
+1. Paste the token you got in 4.
 
 ## Set Up Kubernetes for Ignite
 
